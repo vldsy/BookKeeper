@@ -10,10 +10,10 @@ return new class () extends Migration {
      */
     public function up(): void
     {
-        Schema::create('authors_users', function (Blueprint $table) {
+        Schema::create('author_user', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('author_id')->constrained()->onDelete('cascade');
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('author_id')->references('id')->on('authors')->onDelete('cascade');
+            $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->tinyInteger('follow');
         });
     }
