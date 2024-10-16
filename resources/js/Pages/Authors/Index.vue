@@ -5,29 +5,46 @@ import Author from '@/Components/Author.vue';
 
 defineProps(['authors']);
 
-import UiTable from "@/Components/GridTable.vue";
-import { ref } from 'vue';
-	
-	const table = {
-        headers: {
-            id: 'ID',
-            date: 'Date',
-            due_date: 'Due Date',
-            full_payment_fee: 'Full Payment Fee (IRR)',
-            operation: ''
+import { ref, computed, onMounted } from 'vue'
+
+
+    import DataTable from '@/Components/DataTable.vue'
+
+    const columns = computed(() => {
+        return [
+        {
+          key: 'name',
+          label: 'Task'
         },
-        data: [
-            { id: 1, date: '2022/03/22', due_date: '2022/04/30', full_payment_fee: 'IRR 58,500,000', checked: false },
+        {
+          key: 'description',
+          label: 'Description'
+        },
+        {
+          key: 'status',
+          label: 'Status'
+        },
+        {
+          key: 'createdDate',
+          label: 'Created Date'
+        },
+        {
+          key: 'lastModifiedDate',
+          label: 'Last Modified Date'
+        }
+      ]
+    
+    })
+
+    const rows = computed(() => {
+        return [
+            { id: 1, name: '2022/03/22', description: '2022/04/30', status: 'IRR 58,500,000', createdDate: 'getg', lastModifiedDate: 'egrttg' },
             { id: 2, date: '2022/03/22', due_date: '2022/04/30', full_payment_fee: 'IRR 58,550,000', checked: false },
             { id: 3, date: '2022/03/22', due_date: '2022/04/30', full_payment_fee: 'IRR 58,560,000', checked: false },
             { id: 4, date: '2022/03/22', due_date: '2022/04/30', full_payment_fee: 'IRR 58,500,000', checked: true },
             { id: 5, date: '2022/03/22', due_date: '2022/04/30', full_payment_fee: 'IRR 58,500,000', checked: true },
         ]
-    }
-	
-	const formRef = ref({
-		installments: []
-	})
+    })
 
 </script>
 
@@ -46,13 +63,14 @@ import { ref } from 'vue';
             </div>
         </div>
 
-        <UiTable :items="table">
-            <!-- { ..., row } is an array element which is in loop (an item of items array) -->
-            <!-- Note #checked is same name for it's column name and destructed -->
-            <!-- <template #checked="{ checked, row }">
-                <span class="fi fi-rr-check leading-none mt-0.5 text-xl text-success-solid" v-if="checked"></span>
-                <ui-checkbox v-else v-model="formRef.installments" :value="row.full_payment_fee" />
-            </template> -->
-	    </UiTable>
+        <div class="overflow-x-auto">
+          <DataTable
+            :rows="rows"
+            :columns="columns"
+            @edit="openEditModal"
+            @delete="deleteTodo"
+          />
+        </div>
+
     </AuthenticatedLayout>
 </template>
