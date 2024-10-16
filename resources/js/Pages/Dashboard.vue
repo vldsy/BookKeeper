@@ -2,8 +2,8 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head } from '@inertiajs/vue3';
 
-import NavbarComponent from "../components/Navbar.vue";
-import SidebarComponent from "../components/Sidebar.vue";
+import NavbarComponent from "../Components/Navbar.vue";
+import SidebarComponent from "../Components/Sidebar.vue";
 
 </script>
 
@@ -29,8 +29,8 @@ import SidebarComponent from "../components/Sidebar.vue";
         </div>
 
         <div>
-            <sidebar-component></sidebar-component>
-            <div class="relative md:ml-64 bg-blueGray-100">
+            <!-- <sidebar-component></sidebar-component> -->
+            <div class="relative md:ml-0 bg-blueGray-100">
                 <navbar-component></navbar-component>
                 <!-- Header -->
                 <div class="relative bg-indigo-600 md:pt-32 pb-32 pt-12">
