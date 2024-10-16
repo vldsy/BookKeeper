@@ -8,43 +8,33 @@ defineProps(['authors']);
 import { ref, computed, onMounted } from 'vue'
 
 
-    import DataTable from '@/Components/DataTable.vue'
+import DataTable from '@/Components/DataTable.vue'
 
-    const columns = computed(() => {
-        return [
-        {
-          key: 'name',
-          label: 'Task'
-        },
-        {
-          key: 'description',
-          label: 'Description'
-        },
-        {
-          key: 'status',
-          label: 'Status'
-        },
-        {
-          key: 'createdDate',
-          label: 'Created Date'
-        },
-        {
-          key: 'lastModifiedDate',
-          label: 'Last Modified Date'
-        }
-      ]
+const columns = computed(() => {
+    return [
+    {
+        key: 'name',
+        label: 'Name'
+    },
+    {
+        key: 'age',
+        label: 'Age'
+    },
+    ]
+
+})
+
+const rows = computed(() => {
+    return authors.map(({name, age}) => ({name, age}));
     
-    })
-
-    const rows = computed(() => {
-        return [
-            { id: 1, name: '2022/03/22', description: '2022/04/30', status: 'IRR 58,500,000', createdDate: 'getg', lastModifiedDate: 'egrttg' },
-            { id: 2, date: '2022/03/22', due_date: '2022/04/30', full_payment_fee: 'IRR 58,550,000', checked: false },
-            { id: 3, date: '2022/03/22', due_date: '2022/04/30', full_payment_fee: 'IRR 58,560,000', checked: false },
-            { id: 4, date: '2022/03/22', due_date: '2022/04/30', full_payment_fee: 'IRR 58,500,000', checked: true },
-            { id: 5, date: '2022/03/22', due_date: '2022/04/30', full_payment_fee: 'IRR 58,500,000', checked: true },
-        ]
-    })
+    // return [
+    //     { id: 1, name: '2022/03/22', description: '2022/04/30', status: 'IRR 58,500,000', createdDate: 'getg', lastModifiedDate: 'egrttg' },
+    //     { id: 2, date: '2022/03/22', due_date: '2022/04/30', full_payment_fee: 'IRR 58,550,000', checked: false },
+    //     { id: 3, date: '2022/03/22', due_date: '2022/04/30', full_payment_fee: 'IRR 58,560,000', checked: false },
+    //     { id: 4, date: '2022/03/22', due_date: '2022/04/30', full_payment_fee: 'IRR 58,500,000', checked: true },
+    //     { id: 5, date: '2022/03/22', due_date: '2022/04/30', full_payment_fee: 'IRR 58,500,000', checked: true },
+    // ]
+})
 
 </script>
 
