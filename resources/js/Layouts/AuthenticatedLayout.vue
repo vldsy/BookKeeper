@@ -39,6 +39,18 @@ const showingNavigationDropdown = ref(false);
                                 >
                                     Dashboard
                                 </NavLink>
+                                <NavLink
+                                    :href="route('books.index')"
+                                    :active="route().current('books.index')"
+                                >
+                                    Books
+                                </NavLink>
+                                <NavLink
+                                    :href="route('authors.index')"
+                                    :active="route().current('authors.index')"
+                                >
+                                    Authors
+                                </NavLink>
                             </div>
                         </div>
 
@@ -145,6 +157,18 @@ const showingNavigationDropdown = ref(false);
                             :active="route().current('dashboard')"
                         >
                             Dashboard
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink
+                            :href="route('books.index')"
+                            :active="route().current('books.index')"
+                        >
+                            Books
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink
+                            :href="route('authors.index')"
+                            :active="route().current('authors.index')"
+                        >
+                            Authors
                         </ResponsiveNavLink>
                     </div>
 

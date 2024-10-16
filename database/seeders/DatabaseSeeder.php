@@ -77,9 +77,6 @@ class DatabaseSeeder extends Seeder
                 "author_id" => $author_id,
                 "genre" => "fiction",
             ]);
-
-
-
         }
 
         /*
