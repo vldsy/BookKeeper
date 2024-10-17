@@ -46,7 +46,7 @@ const rows = computed(() => {
 
     <AuthenticatedLayout>
 
-        <pre>{{ JSON.stringify($page.props.auth.user, null, 2) }}</pre>
+        <!-- <pre>{{ JSON.stringify($page.props.auth.user, null, 2) }}</pre> -->
 
         <div class="overflow-x-auto">
             <DataTableAuthors 

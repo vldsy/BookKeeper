@@ -29,22 +29,24 @@
             <!-- authors.follows post -->
             <!-- authors.follows delete -->
 
-            <pre>{{ JSON.stringify(row.followed, null, 2) }}</pre>
+            <!-- <pre>{{ JSON.stringify(row.followed, null, 2) }}</pre> -->
 
-            <Link 
+            
+            <Link v-if="!row.followed"
                     as="button"
                     :href="route('authors.follows', row.id)" method="post"
                     class="mr-2 flex items-center justify-center rounded-lg bg-blue-700 px-4 py-2 text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-green-300 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
                 >
                 Follow
             </Link>
-            <Link 
+            <Link v-else
                 as="button"
                 :href="route('authors.follows', row.id)" method="delete"
                 class="flex items-center justify-center rounded-lg bg-red-700 px-4 py-2 text-sm font-medium text-white hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-green-300 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
             >
                 Unfollow
             </Link>
+            <span v-if="row.followed" class="pl-2">favorite</span>
           </td>
         </tr>
       </tbody>
