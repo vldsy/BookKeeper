@@ -2,6 +2,7 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { useForm, usePage, Head } from '@inertiajs/vue3';
 import DataTableBooks from '@/Components/DataTableBooks.vue'
+import DataTableBooksBorrowed from '@/Components/DataTableBooksBorrowed.vue'
 import { ref, computed, onMounted } from 'vue'
 
 const props = defineProps(['books']);
@@ -52,6 +53,19 @@ const rows = computed(() => {
     return props.books.map(({ id, title, genre, users, author }) => ({ id, title, author: author.name, genre, borrowed: getIsBorrowed(users), favorite: getIsFavorite(users) }));
 })
 
+const columnsBorrowed = computed(() => {
+    return [
+        {
+            key: 'title',
+            label: 'Title'
+        },
+    ]
+})
+
+const rowsBorrowed = computed(() => {
+    return props.books.map(({ id, title, users }) => ({ id, title, borrowed: getIsBorrowed(users), favorite: getIsFavorite(users) })).filter(({ id, title, borrowed, favorite }) => borrowed === true);
+})
+
 
 </script>
 
@@ -88,7 +102,11 @@ const rows = computed(() => {
                                 </div>
                             </div>
                         </div>
-                        <div class="block w-full overflow-x-auto"></div>
+                        <div class="block w-full overflow-x-auto">
+                            <div class="overflow-x-auto">
+                                <DataTableBooksBorrowed :rows="rowsBorrowed" :columns="columnsBorrowed" />
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
