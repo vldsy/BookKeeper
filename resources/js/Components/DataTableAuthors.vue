@@ -13,7 +13,7 @@
       <tbody>
         <tr v-if="rows.length === 0">
           <td :colspan="columns.length + 1" class="px-4 py-3 text-center">
-            😃 All tasks completed!
+            No data
           </td>
         </tr>
         <tr
@@ -26,16 +26,16 @@
           </td>
           <td class="flex items-center px-4 py-3">
             <button
-              @click="editTodo(row.id)"
+              @click="followAuthor(row.id)"
               class="mr-2 flex items-center justify-center rounded-lg bg-blue-700 px-4 py-2 text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-green-300 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
             >
-              Edit
+              Follow
             </button>
             <button
-              @click="deleteTodo(row.id)"
+              @click="unfollowAuthor(row.id)"
               class="flex items-center justify-center rounded-lg bg-red-700 px-4 py-2 text-sm font-medium text-white hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-green-300 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
             >
-              Delete
+              Unfollow
             </button>
           </td>
         </tr>
@@ -44,7 +44,7 @@
   </template>
   
   <script setup>
-  const emit = defineEmits(['edit', 'delete'])
+  const emit = defineEmits(['follow', 'unfollow'])
   
   const { rows, columns } = defineProps({
     rows: {
@@ -57,11 +57,11 @@
     }
   })
   
-  const editTodo = (todoId) => {
-    emit('edit', todoId)
+  const followAuthor = (authorId) => {
+    emit('follow', authorId)
   }
   
-  const deleteTodo = (todoId) => {
-    emit('delete', todoId)
+  const unfollowAuthor = (authorId) => {
+    emit('unfollow', authorId)
   }
   </script>

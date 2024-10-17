@@ -8,7 +8,7 @@ const props = defineProps(['authors']);
 import { ref, computed, onMounted } from 'vue'
 
 
-import DataTable from '@/Components/DataTable.vue'
+import DataTableAuthors from '@/Components/DataTableAuthors.vue'
 
 const columns = computed(() => {
     return [
@@ -25,7 +25,7 @@ const columns = computed(() => {
 })
 
 const rows = computed(() => {
-    return props.authors.map(({ name, age }) => ({ name, age }));
+    return props.authors.map(({ id, name, age }) => ({ id, name, age }));
 
     // return [
     //     { id: 1, name: '2022/03/22', description: '2022/04/30', status: 'IRR 58,500,000', createdDate: 'getg', lastModifiedDate: 'egrttg' },
@@ -36,6 +36,14 @@ const rows = computed(() => {
     // ]
 })
 
+const followAuthor = (id) => {
+    console.log(id);
+}
+
+const unfollowAuthor = (id) => {
+    console.log(id);
+}
+
 </script>
 
 <template>
@@ -44,14 +52,13 @@ const rows = computed(() => {
 
     <AuthenticatedLayout>
 
-        <div class="max-w-2xl mx-auto p-4 sm:p-6 lg:p-8">
-            <div class="mt-6 bg-white shadow-sm rounded-lg divide-y">
-                <Author v-for="author in authors" :key="author.id" :author="author" />
-            </div>
-        </div>
-
         <div class="overflow-x-auto">
-            <DataTable :rows="rows" :columns="columns" @edit="openEditModal" @delete="deleteTodo" />
+            <DataTableAuthors 
+            :rows="rows"
+            :columns="columns"
+            @follow="followAuthor"
+            @unfollow="unfollowAuthor" 
+            />
         </div>
 
     </AuthenticatedLayout>
