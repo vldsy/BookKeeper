@@ -25,6 +25,10 @@
             {{ row[column.key] }}
           </td>
           <td class="flex items-center px-4 py-3">
+
+            <!-- authors.follows post -->
+            <!-- authors.follows delete -->
+
             <!-- <Link 
                     as="button"
                     :href="route('posts.likes', post.id)" method="post"
@@ -32,6 +36,21 @@
                 >
                     Like
             </Link> -->
+
+            <Link 
+                    as="button"
+                    :href="route('authors.follows', row.id)" method="post"
+                    class="block w-20 px-4 py-2 text-start text-sm leading-5 text-blue-700 transition duration-150 ease-in-out hover:bg-gray-100 focus:bg-gray-100 focus:outline-none"
+                >
+                Follow
+            </Link>
+            <Link 
+                as="button"
+                :href="route('authors.follows', row.id)" method="delete"
+                class="block w-20 px-4 py-2 text-start text-sm leading-5 text-blue-700 transition duration-150 ease-in-out hover:bg-gray-100 focus:bg-gray-100 focus:outline-none"
+            >
+                Unfollow
+            </Link>
 
             <button
               @click="followAuthor(row.id)"
