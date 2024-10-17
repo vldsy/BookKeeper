@@ -1,12 +1,10 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import { useForm, Head } from '@inertiajs/vue3';
-
-const props = defineProps(['books']);
-
+import { useForm, usePage, Head } from '@inertiajs/vue3';
+import DataTableBooks from '@/Components/DataTableBooks.vue'
 import { ref, computed, onMounted } from 'vue'
 
-import DataTableBooks from '@/Components/DataTableBooks.vue'
+const props = defineProps(['books']);
 
 const columns = computed(() => {
     return [
@@ -22,23 +20,45 @@ const columns = computed(() => {
 
 })
 
+const { ...userInfo } = computed(() => usePage().props.auth.user).value;
+
+const getIsBorrowed = (users) => {
+    if (users.length <= 0) return false;
+
+    for (var i = 0; i < users.length; i++) {
+        if (users[i].pivot && users[i].pivot.borrowed === 1 && users[i].pivot.user_id === userInfo.id) {
+            return true;
+        }
+    }
+    return false;
+}
+
+const getIsFavorite = (users) => {
+    if (users.length <= 0) return false;
+
+    for (var i = 0; i < users.length; i++) {
+        if (users[i].pivot && users[i].pivot.favorite === 1 && users[i].pivot.user_id === userInfo.id) {
+            return true;
+        }
+    }
+    return false;
+}
+
 const rows = computed(() => {
-    return props.books.map(({ id, title, genre, users }) => ({ id, title, genre, borrowed: false, favorite: false }));
+    return props.books.map(({ id, title, genre, users }) => ({ id, title, genre, borrowed: getIsBorrowed(users), favorite: getIsFavorite(users) }));
 })
 
 
 </script>
 
 <template>
+
     <Head title="Books" />
 
     <AuthenticatedLayout>
 
         <div class="overflow-x-auto">
-            <DataTableBooks 
-            :rows="rows"
-            :columns="columns"
-            />
+            <DataTableBooks :rows="rows" :columns="columns" />
         </div>
 
     </AuthenticatedLayout>

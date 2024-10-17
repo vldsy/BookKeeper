@@ -14,8 +14,8 @@ return new class () extends Migration {
             $table->id();
             $table->foreignId('book_id')->references('id')->on('books')->onDelete('cascade');
             $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->tinyInteger('favorite');
-            $table->tinyInteger('borrowed');
+            $table->tinyInteger('favorite')->default(0);
+            $table->tinyInteger('borrowed')->default(0);
         });
     }
 

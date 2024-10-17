@@ -19,8 +19,6 @@ class BookBorrowController extends Controller
         ];
         $book->users()->syncWithoutDetaching($users);
 
-        dd($book->id);
-
         return back();
     }
 

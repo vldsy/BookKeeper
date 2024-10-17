@@ -21,11 +21,11 @@ const columns = computed(() => {
 })
 
 // this is the way to use auth.user in vue script
-const {...userInfo} = computed(() => usePage().props.auth.user).value;
+const { ...userInfo } = computed(() => usePage().props.auth.user).value;
 
-const hasUserId = (users) => {
+const getIsFollowed = (users) => {
     if (users.length <= 0) return false;
-    
+
     for (var i = 0; i < users.length; i++) {
         if (users[i].pivot && users[i].pivot.follow === 1 && users[i].pivot.user_id === userInfo.id) {
             return true;
@@ -35,7 +35,7 @@ const hasUserId = (users) => {
 }
 
 const rows = computed(() => {
-    return props.authors.map(({ id, name, age, users }) => ({ id, name, age, followed: hasUserId(users) }));
+    return props.authors.map(({ id, name, age, users }) => ({ id, name, age, followed: getIsFollowed(users) }));
 })
 
 </script>
@@ -49,10 +49,7 @@ const rows = computed(() => {
         <!-- <pre>{{ JSON.stringify($page.props.auth.user, null, 2) }}</pre> -->
 
         <div class="overflow-x-auto">
-            <DataTableAuthors 
-            :rows="rows"
-            :columns="columns"
-            />
+            <DataTableAuthors :rows="rows" :columns="columns" />
         </div>
 
     </AuthenticatedLayout>
