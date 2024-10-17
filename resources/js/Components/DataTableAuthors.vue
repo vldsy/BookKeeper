@@ -29,41 +29,20 @@
             <!-- authors.follows post -->
             <!-- authors.follows delete -->
 
-            <!-- <Link 
-                    as="button"
-                    :href="route('posts.likes', post.id)" method="post"
-                    class="block w-20 px-4 py-2 text-start text-sm leading-5 text-blue-700 transition duration-150 ease-in-out hover:bg-gray-100 focus:bg-gray-100 focus:outline-none"
-                >
-                    Like
-            </Link> -->
-
             <Link 
                     as="button"
                     :href="route('authors.follows', row.id)" method="post"
-                    class="block w-20 px-4 py-2 text-start text-sm leading-5 text-blue-700 transition duration-150 ease-in-out hover:bg-gray-100 focus:bg-gray-100 focus:outline-none"
+                    class="mr-2 flex items-center justify-center rounded-lg bg-blue-700 px-4 py-2 text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-green-300 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
                 >
                 Follow
             </Link>
             <Link 
                 as="button"
                 :href="route('authors.follows', row.id)" method="delete"
-                class="block w-20 px-4 py-2 text-start text-sm leading-5 text-blue-700 transition duration-150 ease-in-out hover:bg-gray-100 focus:bg-gray-100 focus:outline-none"
+                class="flex items-center justify-center rounded-lg bg-red-700 px-4 py-2 text-sm font-medium text-white hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-green-300 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
             >
                 Unfollow
             </Link>
-
-            <button
-              @click="followAuthor(row.id)"
-              class="mr-2 flex items-center justify-center rounded-lg bg-blue-700 px-4 py-2 text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-green-300 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
-            >
-              Follow
-            </button>
-            <button
-              @click="unfollowAuthor(row.id)"
-              class="flex items-center justify-center rounded-lg bg-red-700 px-4 py-2 text-sm font-medium text-white hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-green-300 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
-            >
-              Unfollow
-            </button>
           </td>
         </tr>
       </tbody>
@@ -73,8 +52,6 @@
 <script setup>
   import { Link } from '@inertiajs/vue3';
 
-  const emit = defineEmits(['follow', 'unfollow'])
-  
   const { rows, columns } = defineProps({
     rows: {
       type: Array,
@@ -86,11 +63,4 @@
     }
   })
   
-  const followAuthor = (authorId) => {
-    emit('follow', authorId)
-  }
-  
-  const unfollowAuthor = (authorId) => {
-    emit('unfollow', authorId)
-  }
   </script>
