@@ -23,17 +23,8 @@ const columns = computed(() => {
 })
 
 const rows = computed(() => {
-    return props.books.map(({ id, title, genre }) => ({ id, title, genre }));
+    return props.books.map(({ id, title, genre, users }) => ({ id, title, genre, borrowed: false, favorite: false }));
 })
-
-
-const followAuthor = (id) => {
-    console.log(id);
-}
-
-const unfollowAuthor = (id) => {
-    console.log(id);
-}
 
 
 </script>
@@ -47,8 +38,6 @@ const unfollowAuthor = (id) => {
             <DataTableBooks 
             :rows="rows"
             :columns="columns"
-            @follow="followAuthor"
-            @unfollow="unfollowAuthor" 
             />
         </div>
 
@@ -56,5 +45,5 @@ const unfollowAuthor = (id) => {
 
     <!-- display json for debug purposes -->
     <!-- replace 2 with '\t' to do tab indentation  -->
-    <pre>{{ JSON.stringify(props.books, null, 2) }}</pre>
+    <!-- <pre>{{ JSON.stringify(props.books, null, 2) }}</pre> -->
 </template>

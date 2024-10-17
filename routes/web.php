@@ -38,8 +38,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/authors/{author}/follows', [AuthorFollowController::class, 'store'])->name('authors.follows');
     Route::delete('/authors/{author}/follows', [AuthorFollowController::class, 'destroy'])->name('authors.follows');
 
-    Route::post('/books/{book}/likes', [BookBorrowController::class, 'store'])->name('books.borrows');
-    Route::delete('/books/{book}/likes', [BookBorrowController::class, 'destroy'])->name('books.borrows');
+    Route::post('/books/{book}/borrows', [BookBorrowController::class, 'store'])->name('books.borrows');
+    Route::delete('/books/{book}/borrows', [BookBorrowController::class, 'destroy'])->name('books.borrows');
 
     Route::post('/books/{book}/likes', [BookLikeController::class, 'store'])->name('books.likes');
     Route::delete('/books/{book}/likes', [BookLikeController::class, 'destroy'])->name('books.likes');

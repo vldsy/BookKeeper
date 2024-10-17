@@ -15,7 +15,7 @@ class BookController extends Controller
     public function index()
     {
         return Inertia::render('Books/Index', [
-            'books' => Book::orderBy('created_at', 'desc')->get(),
+            'books' => Book::with(['users'])->orderBy('created_at', 'desc')->get(),
         ]);
     }
 }
