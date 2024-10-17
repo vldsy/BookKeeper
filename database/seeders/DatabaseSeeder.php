@@ -73,10 +73,21 @@ class DatabaseSeeder extends Seeder
                 $author_id = Author::where('name', $value->author)->first()->id;
             }
 
+            $genreStrings = array(
+                'fiction',
+                'comedy',
+                'tragedy',
+            );
+            $randomGenreKey = array_rand($genreStrings);
+            $genre = $genreStrings[$randomGenreKey];
+
+            $genre =
+
             Book::create([
                 "title" => $value->title,
                 "author_id" => $author_id,
-                "genre" => "fiction",
+                "genre" => $genre,
+                "publication_date" => $this->faker->dateTimeBetween('-40 years', 'now'),
             ]);
         }
 
