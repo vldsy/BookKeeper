@@ -1,7 +1,6 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { useForm, Head } from '@inertiajs/vue3';
-import Author from '@/Components/Author.vue';
 
 const props = defineProps(['authors']);
 
