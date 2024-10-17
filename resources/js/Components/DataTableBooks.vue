@@ -19,12 +19,6 @@
           {{ row[column.key] }}
         </td>
         <td class="flex items-center px-4 py-3">
-
-          <Link as="button" :href="route('books.borrows', row.id)" method="post"
-            class="mr-2 flex items-center justify-center rounded-lg bg-blue-700 px-4 py-2 text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-green-300 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
-          Follow
-          </Link>
-
           <Link v-if="!row.borrowed" as="button" :href="route('books.borrows', row.id)" method="post"
             class="mr-2 flex items-center justify-center rounded-lg bg-blue-700 px-4 py-2 text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-green-300 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
           Borrow
