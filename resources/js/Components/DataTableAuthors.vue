@@ -29,6 +29,8 @@
             <!-- authors.follows post -->
             <!-- authors.follows delete -->
 
+            <pre>{{ JSON.stringify(row.followed, null, 2) }}</pre>
+
             <Link 
                     as="button"
                     :href="route('authors.follows', row.id)" method="post"

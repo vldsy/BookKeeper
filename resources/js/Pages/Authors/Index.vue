@@ -1,6 +1,6 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import { useForm, Head } from '@inertiajs/vue3';
+import { useForm, usePage, Head } from '@inertiajs/vue3';
 import DataTableAuthors from '@/Components/DataTableAuthors.vue'
 import { ref, computed, onMounted } from 'vue'
 
@@ -20,8 +20,22 @@ const columns = computed(() => {
 
 })
 
+// this is the way to use auth.user in vue script
+const {...userInfo} = computed(() => usePage().props.auth.user).value;
+
+const hasUserId = (users) => {
+    if (users.length <= 0) return false;
+    
+    for (var i = 0; i < users.length; i++) {
+        if (users[i].pivot && users[i].pivot.follow === 1 && users[i].pivot.user_id === userInfo.id) {
+            return true;
+        }
+    }
+    return false;
+}
+
 const rows = computed(() => {
-    return props.authors.map(({ id, name, age }) => ({ id, name, age }));
+    return props.authors.map(({ id, name, age, users }) => ({ id, name, age, followed: hasUserId(users) }));
 })
 
 </script>
@@ -31,6 +45,8 @@ const rows = computed(() => {
     <Head title="Authors" />
 
     <AuthenticatedLayout>
+
+        <pre>{{ JSON.stringify($page.props.auth.user, null, 2) }}</pre>
 
         <div class="overflow-x-auto">
             <DataTableAuthors 
