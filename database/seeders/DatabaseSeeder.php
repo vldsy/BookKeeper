@@ -10,6 +10,7 @@ use Illuminate\Database\Seeder;
 use File;
 use Faker\Generator;
 use Illuminate\Container\Container;
+use Illuminate\Support\Str;
 
 class DatabaseSeeder extends Seeder
 {
@@ -87,5 +88,29 @@ class DatabaseSeeder extends Seeder
             'email' => 'test@example.com',
         ]);
         */
+
+        // Create 2 users
+        //User::truncate();
+        User::where('id', '>', 0)->delete();
+
+        $password = "12345";
+
+        User::create([
+            'name' => "John Doe",
+            'email' => "johndoe@gmail.com",
+            'email_verified_at' => now(),
+            'password' => bcrypt($password),
+            'remember_token' => Str::random(10),
+        ]);
+
+        User::create([
+            'name' => "Bill Gates",
+            'email' => "billgates@gmail.com",
+            'email_verified_at' => now(),
+            'password' => bcrypt($password),
+            'remember_token' => Str::random(10),
+        ]);
+
+
     }
 }
