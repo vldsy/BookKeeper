@@ -13,6 +13,10 @@ const columns = computed(() => {
             label: 'Title'
         },
         {
+            key: 'author',
+            label: 'Author'
+        },
+        {
             key: 'genre',
             label: 'Genre'
         },
@@ -45,7 +49,7 @@ const getIsFavorite = (users) => {
 }
 
 const rows = computed(() => {
-    return props.books.map(({ id, title, genre, users }) => ({ id, title, genre, borrowed: getIsBorrowed(users), favorite: getIsFavorite(users) }));
+    return props.books.map(({ id, title, genre, users, author }) => ({ id, title, author: author.name, genre, borrowed: getIsBorrowed(users), favorite: getIsFavorite(users) }));
 })
 
 
@@ -57,13 +61,15 @@ const rows = computed(() => {
 
     <AuthenticatedLayout>
 
+        <!-- display json for debug purposes -->
+        <!-- replace 2 with '\t' to do tab indentation  -->
+        <!-- <pre>{{ JSON.stringify(props.books, null, 2) }}</pre> -->
+
         <div class="overflow-x-auto">
             <DataTableBooks :rows="rows" :columns="columns" />
         </div>
 
     </AuthenticatedLayout>
 
-    <!-- display json for debug purposes -->
-    <!-- replace 2 with '\t' to do tab indentation  -->
-    <!-- <pre>{{ JSON.stringify(props.books, null, 2) }}</pre> -->
+
 </template>
