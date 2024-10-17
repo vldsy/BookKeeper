@@ -14,8 +14,22 @@ class AuthorController extends Controller
 {
     public function index()
     {
+        $authors = Author::with(['users'])->orderBy('created_at', 'desc')->get();
+        foreach ($authors as $author) {
+            if ($author->pivot && $author->pivot->users) {
+                //dd($author->pivot->users);
+                //echo $author->pivot->users;
+            }
+
+            if ($author->id == 54) {
+                //dd($author);
+            }
+        }
+
+        //dd($authors);
+
         return Inertia::render('Authors/Index', [
-            'authors' => Author::orderBy('created_at', 'desc')->get(),
+            'authors' => Author::with(['users'])->orderBy('created_at', 'desc')->get(),
         ]);
     }
 }

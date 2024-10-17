@@ -19,6 +19,6 @@ class Book extends Model
 
     public function users(): BelongsToMany
     {
-        return $this->belongsToMany(User::class)->withPivot('favorite');
+        return $this->belongsToMany(User::class)->withPivot(['favorite', 'borrowed']);
     }
 }
