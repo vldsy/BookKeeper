@@ -49,8 +49,24 @@ const getIsFavorite = (users) => {
     return false;
 }
 
+const getIsBorrowedByAnother = (users) => {
+    if (users.length <= 0) return false;
+
+    for (var i = 0; i < users.length; i++) {
+        if (users[i].pivot && users[i].pivot.borrowed === 1 && users[i].pivot.user_id !== userInfo.id) {
+            return true;
+        }
+    }
+    return false;
+}
+
 const rows = computed(() => {
-    return props.books.map(({ id, title, genre, users, author }) => ({ id, title, author: author.name, genre, borrowed: getIsBorrowed(users), favorite: getIsFavorite(users) }));
+    return props.books.map(({ id, title, genre, users, author }) => 
+    ({ id, title, author: author.name, genre, 
+        borrowed: getIsBorrowed(users), 
+        favorite: getIsFavorite(users),
+        isBorrowedByAnother: getIsBorrowedByAnother(users)
+    }));
 })
 
 const columnsBorrowed = computed(() => {
